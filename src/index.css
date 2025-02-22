@@ -1,14 +1,15 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@theme {
+  --color-tarawera-50: #edfcfe;
+  --color-tarawera-100: #d2f5fb;
+  --color-tarawera-200: #abeaf6;
+  --color-tarawera-300: #71daef;
+  --color-tarawera-400: #30bfe0;
+  --color-tarawera-500: #2186ab;
+  --color-tarawera-600: #1382a7;
+  --color-tarawera-700: #176987;
+  --color-tarawera-800: #1b566f;
+  --color-tarawera-900: #1a5e79;
+  --color-tarawera-950: #0f3a50;
 }
