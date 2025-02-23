@@ -8,10 +8,6 @@ export const Sources = [
     name: "The Guardian API",
   },
   {
-    key: "ny-times",
-    name: "New Yourk Times API",
-  },
-  {
     key: "news-api-org",
     name: "NEWS API ORG",
   },

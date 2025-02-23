@@ -1,39 +1,47 @@
-import { useRoutes, Navigate } from "react-router-dom";
-import { usePreferencesStore } from "../features/userPreferences/store/preferencesStore";
+import { Routes, Route, Navigate } from "react-router-dom";
 import NewsHomePage from "../features/newsHome/pages";
 import ForYouNewsPage from "../features/forYouNews/pages";
 import UserPreferencesPage from "../features/userPreferences/pages";
-import AppLayout from "../shared/components/appLayout";
-import NotFound from "../shared/components/notFound.tsx";
+import { usePreferencesStore } from "../features/userPreferences/store/preferencesStore";
 
 const AppRoutes = () => {
   const { isPreferencesSet } = usePreferencesStore();
 
-  return useRoutes([
-    {
-      path: "/preferences",
-      element: !isPreferencesSet ? (
-        <UserPreferencesPage />
-      ) : (
-        <Navigate to="/home" replace />
-      ),
-    },
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Navigate to={isPreferencesSet ? "/home" : "/preferences"} replace />
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          isPreferencesSet ? <NewsHomePage /> : <Navigate to="/" replace />
+        }
+      />
 
-    {
-      path: "/",
-      element: isPreferencesSet ? (
-        <AppLayout />
-      ) : (
-        <Navigate to="/preferences" replace />
-      ),
-      children: [
-        { path: "home", element: <NewsHomePage /> },
-        { path: "for-you", element: <ForYouNewsPage /> },
-        { path: "404", element: <NotFound /> },
-        { path: "*", element: <Navigate to="/404" replace /> },
-      ],
-    },
-  ]);
+      <Route
+        path="/for-you"
+        element={
+          isPreferencesSet ? <ForYouNewsPage /> : <UserPreferencesPage />
+        }
+      />
+
+      <Route
+        path="/preferences"
+        element={
+          !isPreferencesSet ? (
+            <UserPreferencesPage />
+          ) : (
+            <Navigate to="/" replace />
+          )
+        }
+      />
+      <Route path="*" element={<h1>404 - Not Found</h1>} />
+    </Routes>
+  );
 };
 
 export default AppRoutes;
