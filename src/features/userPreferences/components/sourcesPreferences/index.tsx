@@ -1,11 +1,9 @@
 import { FC } from "react";
-import { StateSetter } from "../../../../types";
 import { Sources } from "../../config/sources";
 import PreferredOptions from "../preferredOptions";
 import { UserPreferences } from "../../types/userPreferences";
 
 type Props = {
-  setStep: StateSetter<number>;
   preferences: UserPreferences;
   setPreferences: (preferences: UserPreferences) => void;
 };
