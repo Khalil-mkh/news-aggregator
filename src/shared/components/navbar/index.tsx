@@ -32,7 +32,7 @@ const Navbar: FC<Props> = ({ showUpdatePreferences }) => {
       <div className="md:hidden flex items-center justify-between px-4 py-3">
         <NavLink to="/" className="flex items-center space-x-3">
           <img
-            src="/src/assets/logo.svg"
+            src="/logo.svg"
             className="h-8"
             alt="Innoscripta Logo"
           />
@@ -126,7 +126,7 @@ const Navbar: FC<Props> = ({ showUpdatePreferences }) => {
       <div className="hidden md:flex items-center justify-between px-8 py-4">
         <NavLink to="/" className="flex items-center space-x-3">
           <img
-            src="/src/assets/logo.svg"
+            src="/logo.svg"
             className="h-8"
             alt="Innoscripta Logo"
           />

@@ -7,7 +7,7 @@ const NotFound = () => {
     <div className="flex flex-col h-screen bg-tarawera-500">
       <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
         <img
-          src="/src/assets/logo.svg"
+          src="/logo.svg"
           alt="Logo"
           className="h-8 w-auto sm:h-12"
         />
