@@ -86,7 +86,6 @@ const Navbar: FC<Props> = ({ showUpdatePreferences }) => {
             </li>
           </ul>
 
-          {/* Update Preferences Button */}
           {showUpdatePreferences && (
             <button
               className="bg-tarawera-300 p-2 mx-4 font-semibold rounded-lg text-white"
