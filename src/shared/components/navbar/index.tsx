@@ -1,6 +1,26 @@
+import { FC, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useSearchStore } from "../../store/searchStore";
+import debounce from "lodash/debounce";
+import { usePreferencesModalStore } from "../../store/preferencesModalStore";
 
-const Navbar = () => {
+type Props = {
+  showUpdatePreferences: boolean;
+};
+
+const Navbar: FC<Props> = ({ showUpdatePreferences }) => {
+  const { searchValue, setSearchValue } = useSearchStore();
+  const { setOpen } = usePreferencesModalStore();
+
+  useEffect(() => {
+    const trackSearch = debounce(() => {
+      setSearchValue(searchValue);
+    }, 500);
+    trackSearch();
+
+    return () => trackSearch.cancel();
+  }, [searchValue, setSearchValue]);
+
   return (
     <>
       <nav className="bg-tarawera-950 fixed w-full z-20 top-0 start-0 border-b border-gray-200">
@@ -37,6 +57,14 @@ const Navbar = () => {
               </svg>
               <span className="sr-only">Search</span>
             </button>
+            {showUpdatePreferences && (
+              <button
+                className="bg-tarawera-300 px-4 mx-4 font-semibold rounded-lg"
+                onClick={() => setOpen(true)}
+              >
+                Update preferences
+              </button>
+            )}
             <div className="relative hidden md:block">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
@@ -58,6 +86,8 @@ const Navbar = () => {
                 id="search-navbar"
                 className="block w-full p-2 ps-10 text-sm text-tarawera-900 border border-tarawera-300 rounded-lg bg-gray-50"
                 placeholder="Search..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
               />
             </div>
             <button
