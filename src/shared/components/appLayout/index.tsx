@@ -6,9 +6,9 @@ const AppLayout: FC<PropsWithChildren & { showUpdatePreferences: boolean }> = ({
   showUpdatePreferences,
 }) => {
   return (
-    <div className="min-h-screen bg-tarawera-900 px-12 py-4">
+    <div className="min-h-screen bg-tarawera-900">
       <Navbar showUpdatePreferences={showUpdatePreferences} />
-      {children}
+      <div className="pt-18">{children}</div>
     </div>
   );
 };

@@ -142,11 +142,13 @@ const ForYouNewsPage = () => {
     <AppLayout showUpdatePreferences>
       {isLoading && <Loader />}
       {!isLoading && articles.length === 0 && <NoData />}
-      <div className="grid md:grid-cols-3 gap-16 mt-24">
-        {articles?.map((article: ArticleModel) => {
-          return <NewsCard article={article} />;
-        })}
-      </div>
+      {!isLoading && (
+        <div className="grid md:grid-cols-3 gap-16 mt-24">
+          {articles?.map((article: ArticleModel) => {
+            return <NewsCard article={article} />;
+          })}
+        </div>
+      )}
       <Modal
         open={open}
         onClose={() => setOpen(false)}

@@ -75,11 +75,13 @@ const NewsHomePage = () => {
       />
       {isLoading && <Loader />}
       {!isLoading && articles.length === 0 && <NoData />}
-      <div className="grid md:grid-cols-3 gap-16 mt-36">
-        {articles?.map((article: ArticleModel) => {
-          return <NewsCard article={article} />;
-        })}
-      </div>
+      {!isLoading && (
+        <div className="grid md:grid-cols-3 gap-16 mt-36 p-4">
+          {articles?.map((article: ArticleModel) => (
+            <NewsCard key={article.url} article={article} />
+          ))}
+        </div>
+      )}
     </AppLayout>
   );
 };

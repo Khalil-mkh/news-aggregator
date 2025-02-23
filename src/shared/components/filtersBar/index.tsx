@@ -47,10 +47,8 @@ const FiltersBar: FC<Props> = ({
   }, []);
 
   return (
-    <nav className="fixed w-full start-0 border-b border-gray-200 pt-14 bg-white">
-      {/* ✅ Mobile Layout */}
+    <nav className="fixed w-full start-0 border-b border-gray-200 bg-white z-10">
       <div className="sm:hidden flex justify-between items-center px-4 py-3">
-        {/* ✅ Category Dropdown */}
         <select
           id="tabs"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
@@ -64,14 +62,11 @@ const FiltersBar: FC<Props> = ({
           ))}
         </select>
 
-        {/* ✅ Mobile Icons */}
         <div className="relative flex space-x-3">
-          {/* ✅ Source Selection Button */}
           <button onClick={() => setIsSourcePopoverOpen(!isSourcePopoverOpen)}>
             <NewspaperIcon className="w-6 h-6 text-gray-700 hover:text-blue-500" />
           </button>
 
-          {/* ✅ Source Popover */}
           {isSourcePopoverOpen && (
             <div
               ref={sourcePopoverRef}
@@ -86,6 +81,7 @@ const FiltersBar: FC<Props> = ({
                     <button
                       className="w-full text-left px-3 py-1 text-gray-700 hover:bg-gray-200 rounded-md"
                       onClick={() => {
+                        setActiveSource(source.key);
                         setIsSourcePopoverOpen(false);
                       }}
                     >
@@ -97,16 +93,14 @@ const FiltersBar: FC<Props> = ({
             </div>
           )}
 
-          {/* ✅ Date Picker Button */}
           <button onClick={() => setIsDatePopoverOpen(!isDatePopoverOpen)}>
             <CalendarIcon className="w-6 h-6 text-gray-700 hover:text-blue-500" />
           </button>
 
-          {/* ✅ Date Popover */}
           {isDatePopoverOpen && (
             <div
               ref={datePopoverRef}
-              className="absolute top-full right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg p-2 z-50"
+              className="absolute top-full right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg p-2 z-50 transform translate-x-0"
             >
               <DateRange
                 value={dateRange}
@@ -117,9 +111,7 @@ const FiltersBar: FC<Props> = ({
         </div>
       </div>
 
-      {/* ✅ Desktop Layout */}
       <div className="hidden sm:flex bg-tarawera-950 text-white justify-between items-center border-b border-gray-700 px-4 py-3">
-        {/* ✅ Category Tabs */}
         <div className="flex space-x-6 mx-auto">
           {Categories.map((category) => (
             <button
@@ -136,9 +128,7 @@ const FiltersBar: FC<Props> = ({
           ))}
         </div>
 
-        {/* ✅ Desktop Icons */}
         <div className="relative flex space-x-3">
-          {/* ✅ Source Selection */}
           <button onClick={() => setIsSourcePopoverOpen(!isSourcePopoverOpen)}>
             <NewspaperIcon className="w-6 h-6 text-white hover:text-gray-300 cursor-pointer" />
           </button>
@@ -169,7 +159,6 @@ const FiltersBar: FC<Props> = ({
             </div>
           )}
 
-          {/* ✅ Date Picker */}
           <button onClick={() => setIsDatePopoverOpen(!isDatePopoverOpen)}>
             <CalendarIcon className="w-6 h-6 text-white hover:text-gray-300 cursor-pointer" />
           </button>
