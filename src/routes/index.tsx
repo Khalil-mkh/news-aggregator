@@ -3,6 +3,7 @@ import NewsHomePage from "../features/newsHome/pages";
 import ForYouNewsPage from "../features/forYouNews/pages";
 import UserPreferencesPage from "../features/userPreferences/pages";
 import { usePreferencesStore } from "../features/userPreferences/store/preferencesStore";
+import NotFound from "../shared/components/notFound.tsx";
 
 const AppRoutes = () => {
   const { isPreferencesSet } = usePreferencesStore();
@@ -39,7 +40,7 @@ const AppRoutes = () => {
           )
         }
       />
-      <Route path="*" element={<h1>404 - Not Found</h1>} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
