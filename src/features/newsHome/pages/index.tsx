@@ -76,7 +76,7 @@ const NewsHomePage = () => {
       {isLoading && <Loader />}
       {!isLoading && articles.length === 0 && <NoData />}
       {!isLoading && (
-        <div className="grid md:grid-cols-3 gap-16 mt-36 p-4">
+        <div className="grid md:grid-cols-3 gap-16 mt-24 px-12">
           {articles?.map((article: ArticleModel) => (
             <NewsCard key={article.url} article={article} />
           ))}

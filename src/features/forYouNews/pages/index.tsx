@@ -143,7 +143,7 @@ const ForYouNewsPage = () => {
       {isLoading && <Loader />}
       {!isLoading && articles.length === 0 && <NoData />}
       {!isLoading && (
-        <div className="grid md:grid-cols-3 gap-16 mt-24">
+        <div className="grid md:grid-cols-3 gap-16 mt-24 px-12">
           {articles?.map((article: ArticleModel) => {
             return <NewsCard article={article} />;
           })}
