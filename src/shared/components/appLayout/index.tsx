@@ -1,11 +1,14 @@
-import { Outlet } from "react-router-dom";
 import Navbar from "../navbar";
+import { FC, PropsWithChildren } from "react";
 
-const AppLayout = () => {
+const AppLayout: FC<PropsWithChildren & { showUpdatePreferences: boolean }> = ({
+  children,
+  showUpdatePreferences,
+}) => {
   return (
     <div className="min-h-screen bg-tarawera-900 px-12 py-4">
-      <Navbar />
-      <Outlet />
+      <Navbar showUpdatePreferences={showUpdatePreferences} />
+      {children}
     </div>
   );
 };
