@@ -88,7 +88,6 @@ const ForYouNewsPage = () => {
         },
       },
       {
-        queryKey: [{ url: "1" }],
         enabled:
           isNull(preferences?.sources) ||
           preferences.sources?.includes("news-api"),
@@ -100,7 +99,7 @@ const ForYouNewsPage = () => {
       {
         params: {
           q: searchValue,
-          categories: preferences?.categories?.join(","),
+          categories: preferences?.categories?.join(" | "),
         },
       },
       {

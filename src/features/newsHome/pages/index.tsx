@@ -26,20 +26,30 @@ const NewsHomePage = () => {
   const { data: newsOrgArticles, isLoading: isNewsOrgArticlesLoading } =
     useGetNewsOrgArticles({
       params: {
-        category: activeCategory,
         q: searchValue,
+        category: activeCategory,
       },
     });
 
   const { data: guardianArticles, isLoading: isGuardianArticlesLoading } =
     useGetAllGuardianArticles({
       params: {
+        q: searchValue,
         categories: activeCategory,
+        "from-date": dateRange.start,
+        "to-date": dateRange.end,
       },
     });
 
   const { data: newsApiArticles, isLoading: isNewsApiArticlesLoading } =
-    useGetNewsAPIArticles({});
+    useGetNewsAPIArticles({
+      params: {
+        q: searchValue,
+        categories: activeCategory,
+        published_after: dateRange.start,
+        published_before: dateRange.end,
+      },
+    });
 
   const articles = useMemo(() => {
     const allArticles = normalizeArticles(
