@@ -2,7 +2,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { useMemo } from 'react';
 import omit from 'lodash/omit';
-
 import {
   useQuery as useBaseQuery,
   UseQueryOptions,
@@ -27,8 +26,6 @@ const defaultOptions: Required<CreateReactQueryOptions> = {
 
 export type CreateReactQueryOptions = {
   axiosInstance?: AxiosInstance;
-  // toast?: false | ((err: AxiosError) => unknown | Promise<unknown>);
-  // log?: false | ((err: AxiosError) => unknown | Promise<unknown>);
 };
 
 const createQueryHelper = ({ axiosInstance }: Required<CreateReactQueryOptions>) => <
@@ -67,24 +64,23 @@ const createQueryHelper = ({ axiosInstance }: Required<CreateReactQueryOptions>)
       }),
       [hookQueryOptions]
     );
+
     return useBaseQuery<
       TQueryData,
       unknown,
       TQueryData,
       [AxiosRequestConfigWithTypes<TQueryBody, TQueryQuery, TQueryParams>]
     >(
-      [queryKey],
+      queryKey,
       async ({ signal }) => {
         try {
-          const { data } = (await axiosInstance.request<TQueryData>({
+          const { data } = await axiosInstance.request<TQueryData>({
             ...config,
             signal,
-          })) as any;
+          });
           return data;
         } catch (err) {
           if (!axios.isAxiosError(err)) throw err;
-          // log && log(err);
-          // toast && toast(err);
           throw err;
         }
       },
@@ -104,11 +100,11 @@ const createQueryHelper = ({ axiosInstance }: Required<CreateReactQueryOptions>)
 
   useFn.getQueryKey = (
     hookConfig?: AxiosRequestConfigWithTypes<TQueryBody, TQueryQuery, TQueryParams> | null
-  ) => {
-    const customConfig = omit(hookConfig, ['headers', 'transformRequest', 'transformResponse']);
-    const cleanBaseConfig = omit(baseConfig, ['headers', 'transformRequest', 'transformResponse']);
-
-    return { ...cleanBaseConfig, ...customConfig };
+  ): [AxiosRequestConfigWithTypes<TQueryBody, TQueryQuery, TQueryParams>] => {
+    const cleanConfig = omit(hookConfig, ['headers', 'transformRequest', 'transformResponse']);
+    const cleanBase = omit(baseConfig, ['headers', 'transformRequest', 'transformResponse']);
+    
+    return [{ ...cleanBase, ...cleanConfig }];
   };
 
   useFn.fetchQuery = (
@@ -118,17 +114,15 @@ const createQueryHelper = ({ axiosInstance }: Required<CreateReactQueryOptions>)
     const queryKey = useFn.getQueryKey(hookConfig);
     const config = { ...baseConfig, ...hookConfig };
 
-    return queryClient.fetchQuery([queryKey], async ({ signal }) => {
+    return queryClient.fetchQuery(queryKey, async ({ signal }) => {
       try {
-        const { data } = (await axiosInstance.request<TQueryData>({
+        const { data } = await axiosInstance.request<TQueryData>({
           ...config,
           signal,
-        })) as any;
+        });
         return data;
       } catch (err) {
         if (!axios.isAxiosError(err)) throw err;
-        // log && log(err);
-        // toast && toast(err);
         throw err;
       }
     });
@@ -138,14 +132,7 @@ const createQueryHelper = ({ axiosInstance }: Required<CreateReactQueryOptions>)
     queryClient: QueryClient,
     hookConfig?: AxiosRequestConfigWithTypes<TQueryBody, TQueryQuery, TQueryParams> | null
   ) => {
-    queryClient.invalidateQueries([
-      hookConfig
-        ? useFn.getQueryKey(hookConfig)
-        : {
-            method: baseConfig?.method,
-            url: baseConfig?.url,
-          },
-    ]);
+    queryClient.invalidateQueries(useFn.getQueryKey(hookConfig));
   };
 
   useFn.setData = (
@@ -153,14 +140,14 @@ const createQueryHelper = ({ axiosInstance }: Required<CreateReactQueryOptions>)
     hookConfig: AxiosRequestConfigWithTypes<TQueryBody, TQueryQuery, TQueryParams> | null,
     updater: Updater<TQueryData | undefined, TQueryData>
   ) => {
-    queryClient.setQueryData<TQueryData>([useFn.getQueryKey(hookConfig)], updater);
+    queryClient.setQueryData<TQueryData>(useFn.getQueryKey(hookConfig), updater);
   };
 
   useFn.getData = (
     queryClient: QueryClient,
     hookConfig?: AxiosRequestConfigWithTypes<TQueryBody, TQueryQuery, TQueryParams> | null
   ) => {
-    return queryClient.getQueryData<TQueryData>([useFn.getQueryKey(hookConfig)]);
+    return queryClient.getQueryData<TQueryData>(useFn.getQueryKey(hookConfig));
   };
 
   return useFn;

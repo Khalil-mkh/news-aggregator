@@ -23,7 +23,7 @@ const NewsHomePage = () => {
     end: new Date(),
   });
 
-  const { data: newsOrgArticles, isLoading: isNewsOrgArticlesLoading } =
+  const { data: newsOrgArticles, isFetching: isNewsOrgArticlesLoading } =
     useGetNewsOrgArticles({
       params: {
         q: searchValue,
@@ -31,7 +31,7 @@ const NewsHomePage = () => {
       },
     });
 
-  const { data: guardianArticles, isLoading: isGuardianArticlesLoading } =
+  const { data: guardianArticles, isFetching: isGuardianArticlesLoading } =
     useGetAllGuardianArticles({
       params: {
         q: searchValue,
@@ -41,7 +41,7 @@ const NewsHomePage = () => {
       },
     });
 
-  const { data: newsApiArticles, isLoading: isNewsApiArticlesLoading } =
+  const { data: newsApiArticles, isFetching: isNewsApiArticlesLoading } =
     useGetNewsAPIArticles({
       params: {
         q: searchValue,

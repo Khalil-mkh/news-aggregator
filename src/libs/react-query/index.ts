@@ -10,11 +10,10 @@ export const queryClientConfig: QueryClientConfig = {
       refetchOnWindowFocus: false,
       refetchInterval: false,
       refetchIntervalInBackground: false,
-      staleTime: 2 * 60 * 1000,
+      staleTime: 5 * 60 * 1000,
       structuralSharing: true,
       retry: false,
     },
-    mutations: {},
   },
 };
 

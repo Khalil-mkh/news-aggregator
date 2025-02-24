@@ -63,7 +63,7 @@ const ForYouNewsPage = () => {
     setOpen(false);
   };
 
-  const { data: newsOrgArticles, isLoading: isNewsOrgArticlesLoading } =
+  const { data: newsOrgArticles, isFetching: isNewsOrgArticlesLoading } =
     useGetNewsOrgArticles(
       {
         params: {
@@ -78,7 +78,7 @@ const ForYouNewsPage = () => {
       }
     );
 
-  const { data: newsApiArticles, isLoading: isNewsAPIArticlesLoading } =
+  const { data: newsApiArticles, isFetching: isNewsAPIArticlesLoading } =
     useGetNewsAPIArticles(
       {
         params: {
@@ -93,7 +93,7 @@ const ForYouNewsPage = () => {
       }
     );
 
-  const { data: guardianArticles, isLoading: isGuardianArticlesLoading } =
+  const { data: guardianArticles, isFetching: isGuardianArticlesLoading } =
     useGetAllGuardianArticles(
       {
         params: {
