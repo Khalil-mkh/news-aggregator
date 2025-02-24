@@ -13,14 +13,15 @@ import AppLayout from "../../../shared/components/appLayout";
 import { useSearchStore } from "../../../shared/store/searchStore";
 import Loader from "../../../shared/components/loader";
 import NoData from "../../../shared/components/noData";
+import { DateRangeType } from "../../../shared/components/dateRange";
 
 const NewsHomePage = () => {
   const { searchValue } = useSearchStore();
   const [activeCategory, setActiveCategory] = useState(Categories[0].key);
   const [activeSource, setActiveSource] = useState("");
-  const [dateRange, setDateRange] = useState({
-    start: new Date(),
-    end: new Date(),
+  const [dateRange, setDateRange] = useState<DateRangeType>({
+    start: new Date("2022-02-24T00:00:00Z"),
+    end: new Date("2024-02-24T23:59:59Z"),
   });
 
   const { data: newsOrgArticles, isFetching: isNewsOrgArticlesLoading } =

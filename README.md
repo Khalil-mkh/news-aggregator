@@ -54,6 +54,6 @@ docker run -p 3000:3000 news-aggregator
 
 The application will be available at `http://localhost:3000`
 
-## License
+### ⚠️ Note: API Key Handling
 
-MIT License
+For this test challenge, API keys are stored as environment variables (`.env`) and directly exposed in the frontend. This approach is **not recommended for production**, as it can lead to security risks.
