@@ -77,6 +77,7 @@ const NewsHomePage = () => {
       <FiltersBar
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
+        activeSource={activeSource}
         setActiveSource={setActiveSource}
         dateRange={dateRange}
         onDateRangeChange={setDateRange}

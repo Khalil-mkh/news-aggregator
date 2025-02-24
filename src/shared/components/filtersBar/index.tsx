@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { FC, useState, useRef } from "react";
 import { StateSetter } from "../../../types";
 import { Categories } from "../../../features/userPreferences/config/categories";
 import { Sources } from "../../../features/userPreferences/config/sources";
@@ -8,6 +8,7 @@ import DateRange, { DateRangeType } from "../dateRange";
 type Props = {
   activeCategory: string;
   setActiveCategory: StateSetter<string>;
+  activeSource: string;
   setActiveSource: StateSetter<string>;
   dateRange: DateRangeType;
   onDateRangeChange: (value: DateRangeType) => void;
@@ -16,6 +17,7 @@ type Props = {
 const FiltersBar: FC<Props> = ({
   activeCategory,
   setActiveCategory,
+  activeSource,
   setActiveSource,
   dateRange,
   onDateRangeChange,
@@ -25,26 +27,6 @@ const FiltersBar: FC<Props> = ({
 
   const sourcePopoverRef = useRef<HTMLDivElement>(null);
   const datePopoverRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        sourcePopoverRef.current &&
-        !sourcePopoverRef.current.contains(event.target as Node)
-      ) {
-        setIsSourcePopoverOpen(false);
-      }
-      if (
-        datePopoverRef.current &&
-        !datePopoverRef.current.contains(event.target as Node)
-      ) {
-        setIsDatePopoverOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
     <nav className="fixed w-full start-0 border-b border-gray-200 bg-white z-10">
@@ -79,7 +61,11 @@ const FiltersBar: FC<Props> = ({
                 {Sources.map((source) => (
                   <li key={source.key}>
                     <button
-                      className="w-full text-left px-3 py-1 text-gray-700 hover:bg-gray-200 rounded-md"
+                      className={`w-full text-left px-3 py-1 rounded-md ${
+                        activeSource === source.key
+                          ? "bg-tarawera-500 text-white font-bold"
+                          : "text-gray-700 hover:bg-gray-200"
+                      }`}
                       onClick={() => {
                         setActiveSource(source.key);
                         setIsSourcePopoverOpen(false);
@@ -145,7 +131,11 @@ const FiltersBar: FC<Props> = ({
                 {Sources.map((source) => (
                   <li key={source.key}>
                     <button
-                      className="w-full text-left px-3 py-1 text-gray-700 hover:bg-gray-200 rounded-md"
+                      className={`w-full text-left px-3 py-1 rounded-md ${
+                        activeSource === source.key
+                          ? "bg-tarawera-500 text-white font-bold" // ✅ Highlight active source
+                          : "text-gray-700 hover:bg-gray-200"
+                      }`}
                       onClick={() => {
                         setActiveSource(source.key);
                         setIsSourcePopoverOpen(false);
