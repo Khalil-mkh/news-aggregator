@@ -46,8 +46,6 @@ const NewsHomePage = () => {
       params: {
         q: searchValue,
         categories: activeCategory,
-        published_after: dateRange.start,
-        published_before: dateRange.end,
       },
     });
 

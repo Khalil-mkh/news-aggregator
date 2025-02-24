@@ -67,12 +67,20 @@ const UserPreferencesPage = () => {
         );
       case 3:
         return (
-          <button
-            className="bg-tarawera-500 w-full text-white px-4 py-2 rounded-lg hover:bg-tarawera-700 transition-colors mt-4"
-            onClick={handleSubmit}
-          >
-            Submit & Continue
-          </button>
+          <div className="flex items-center justify-between mt-8 space-x-4">
+            <button
+              className="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors"
+              onClick={() => setStep(step - 1)}
+            >
+              Back
+            </button>
+            <button
+              className="bg-tarawera-500 text-white px-4 py-2 rounded-lg hover:bg-tarawera-700 transition-colors mt-4"
+              onClick={handleSubmit}
+            >
+              Submit & Continue
+            </button>
+          </div>
         );
       default:
         return null;

@@ -74,8 +74,8 @@ const ForYouNewsPage = () => {
       },
       {
         enabled:
-          isNull(preferences?.sources) ||
-          preferences.sources?.includes("news-api-org"),
+          preferences?.sources?.length === 0 ||
+          preferences?.sources?.includes("news-api-org"),
       }
     );
 
@@ -89,8 +89,8 @@ const ForYouNewsPage = () => {
       },
       {
         enabled:
-          isNull(preferences?.sources) ||
-          preferences.sources?.includes("news-api"),
+          preferences?.sources?.length === 0 ||
+          preferences?.sources?.includes("news-api"),
       }
     );
 
@@ -104,8 +104,8 @@ const ForYouNewsPage = () => {
       },
       {
         enabled:
-          isNull(preferences?.sources) ||
-          preferences.sources?.includes("guardian-api"),
+          preferences?.sources?.length === 0 ||
+          preferences?.sources?.includes("guardian-api"),
       }
     );
 
